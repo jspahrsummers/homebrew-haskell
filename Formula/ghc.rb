@@ -133,10 +133,10 @@ index 652fbea..a21811e 100644
   * "C++ implementations should define these macros only when
   * __STDC_LIMIT_MACROS is defined before <stdint.h> is included."
 diff --git a/rts/RtsProbes.d b/rts/RtsProbes.d
-index 13f40f8..226f881 100644
+index 13f40f8..d7e54a0 100644
 --- a/rts/RtsProbes.d
 +++ b/rts/RtsProbes.d
-@@ -6,6 +6,12 @@
+@@ -6,6 +6,10 @@
   *
   * ---------------------------------------------------------------------------*/
  
