@@ -57,8 +57,8 @@ class Ghc < Formula
   end
 
   def patches
-    # fixes ghc 7.6.3 compilation on 10.9
-    DATA if MacOS.version >= :mavericks
+    # fixes ghc 7.6.3 compilation on Xcode 5
+    DATA
   end
 
   def install
@@ -69,9 +69,9 @@ class Ghc < Formula
     subprefix = buildpath+'subfo'
 
     Ghcbinary.new.brew do
-      # ensure configure script does not use Xcode 5 "gcc" aka clang on 10.9
+      # ensure configure script does not use Xcode 5 "gcc" aka clang
       bin_cfg_args =  %W[ --prefix=#{subprefix} ]
-      bin_cfg_args << "--with-gcc=#{ENV.cc}" if MacOS.version >= :mavericks
+      bin_cfg_args << "--with-gcc=#{ENV.cc}"
 
       system "./configure", *bin_cfg_args
       system 'make install'
@@ -90,9 +90,9 @@ class Ghc < Formula
         arch = 'i386'
       end
 
-      # ensure configure script does not use Xcode 5 "gcc" aka clang on 10.9
+      # ensure configure script does not use Xcode 5 "gcc" aka clang
       src_cfg_args = %W[ --prefix=#{prefix} --build=#{arch}-apple-darwin ]
-      src_cfg_args << "--with-gcc=#{ENV.cc}" if MacOS.version >= :mavericks
+      src_cfg_args << "--with-gcc=#{ENV.cc}"
 
       system "./configure", *src_cfg_args
       system 'make'
@@ -141,9 +141,7 @@ index 13f40f8..226f881 100644
   * ---------------------------------------------------------------------------*/
  
 +#ifdef __APPLE__ && __MACH__
-+# if MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_X_VERSION_10_9
-+#  define USE_INTTYPES_H_FOR_RTS_PROBES_D
-+# endif
++# define USE_INTTYPES_H_FOR_RTS_PROBES_D
 +#endif
 +
  #include "HsFFI.h"
